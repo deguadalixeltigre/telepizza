@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "bf9e2a04-1953-45bb-be58-95db64664a44",
+		"name": "TELEPIZZA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ALL CATEGORIES",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET CATEGORY DETAILS BY GIVEN ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/categories/d860057c-6949-4657-8cfb-4bc73f74fe05",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories",
+						"d860057c-6949-4657-8cfb-4bc73f74fe05"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST CREATE NEW CATEGORY",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryName\": \"Salads\",\r\n    \"description\": \"Descubre nuestras nuevas ensaladas VIPS hechas con ingredientes tan sabrosos como aguacate, queso de cabra, tiras de vacuno marinado o mango. Waikiki, Santorini, Los Ángeles o 5 Quesos ...\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT UPDATE CATEGORY",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryName\": \"Mediterranean Salads\",\r\n    \"description\": \"Discover our new salads made with ingredients as tasty as avocado, goat cheese, marinated beef strips or mango. Waikiki, Santorini, Los Angeles or 5 Cheese...\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/categories/5c346d49-0d62-458f-ae6e-aef86f323014",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories",
+						"5c346d49-0d62-458f-ae6e-aef86f323014"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE CATEGORY",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/categories/c488f8b2-aefc-47de-ae6f-65c8aed59a14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories",
+						"c488f8b2-aefc-47de-ae6f-65c8aed59a14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST CREATE NEW CATEGORY ITEM",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryItemName\": \"Ensalada Waikiki\",\r\n    \"description\": \"Tiras de vacuno marinado a la plancha, mango, pepino, pimiento rojo, cebolla roja, anacardos y un toque de hierbabuena, aliñada con salsa sweet chili y cilantro sobre láminas de wonton y una base de tallarines y mezcla de lechugas con brotes.\",\r\n    \"price\": 12.50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/categories/d860057c-6949-4657-8cfb-4bc73f74fe05/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories",
+						"d860057c-6949-4657-8cfb-4bc73f74fe05",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT UPDATE CATEGORY ITEM",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryItemId\": \"f6ea36a7-221b-484f-99f8-3fad6febe476\",\r\n    \"categoryItemName\": \"Salad Los Angeles\",\r\n    \"description\": \"Avocado, mango, strawberries, goat cheese, feta cheese, cherry tomato, red onion and walnuts, dressed with lime and coriander vinaigrette on a base of quinoa and mixed lettuce with sprouts.\",\r\n    \"categoryId\": \"5c346d49-0d62-458f-ae6e-aef86f323014\",\r\n    \"price\": 12.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/categories/5c346d49-0d62-458f-ae6e-aef86f323014/items/f6ea36a7-221b-484f-99f8-3fad6febe476",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories",
+						"5c346d49-0d62-458f-ae6e-aef86f323014",
+						"items",
+						"f6ea36a7-221b-484f-99f8-3fad6febe476"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE CATEGORY ITEM",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/categories/d860057c-6949-4657-8cfb-4bc73f74fe05/items/31d47ba9-04db-49bc-8765-bf86857b41e0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories",
+						"d860057c-6949-4657-8cfb-4bc73f74fe05",
+						"items",
+						"31d47ba9-04db-49bc-8765-bf86857b41e0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
