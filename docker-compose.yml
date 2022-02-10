@@ -1,0 +1,57 @@
+version: "3.1"
+
+services:
+    historydb:
+        container_name: historydb
+        image: mongo:latest
+        restart: always
+        volumes:
+            - ./historyData:/data/db
+        environment:
+            - MONGO_INITDB_DATABASE=historyDB
+        ports:
+            - "27017:27017"    
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq
+        ports:
+            - 5672:5672
+            - 15672:15672
+    mysql:
+        image: 'mysql:latest'
+        restart: always
+        volumes:
+            - './mysql_data:/var/lib/mysql'
+        environment:
+            - MYSQL_ROOT_PASSWORD=4g4p1t0
+        ports:
+            - '3306:3306'
+    menu-service:
+        container_name: menu-service
+        image: menu-service
+        build:
+           context: ./
+           dockerfile: Dockerfile
+           args:
+              - NODE_ENV        
+              - MENUS_API_PORT
+              - DB_HOST
+              - DB_PORT
+              - DB_USERNAME
+              - DB_PASSWORD
+              - DB_NAME
+              - DB_DIALECT
+        environment:
+            - NODE_ENV=${NODE_ENV}          
+            - MENUS_API_PORT=${MENUS_API_PORT}
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_USERNAME=${DB_USERNAME}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_NAME=${DB_NAME}
+            - DB_DIALECT=${DB_DIALECT}
+        env_file:
+            - .env
+        restart: on-failure
+        ports:
+            - "${MENUS_API_PORT}:${MENUS_API_PORT}"

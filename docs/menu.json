@@ -1,0 +1,130 @@
+{
+    "id": 1064,
+    "currency": "USD",
+    "categories": [
+        {
+            "id": 2861,
+            "name": "Pizza",
+            "description": "Best Pizza, authentic Italian style, fresh ingredients",
+            "items": [
+                {
+                    "id": 9240,
+                    "name": "Pizza Margherita",
+                    "description": "Tomato sauce, oregano, garlic and fresh basil",
+                    "price": 8,
+                    "groups": []
+                },
+                {
+                    "id": 713427,
+                    "name": "Pizza Prosciutto",
+                    "description": "Splitted half / half. For each half you can choose your own toppings",
+                    "price": 10,
+                    "groups": [
+                        {
+                            "id": 160392,
+                            "name": "Toppings 1st half",
+                            "required": false,
+                            "options": [
+                                {
+                                    "id": 733146,
+                                    "name": "Ham",
+                                    "price": 1.2
+                                },
+                                {
+                                    "id": 733147,
+                                    "name": "Mushrooms",
+                                    "price": 1.2
+                                },
+                                {
+                                    "id": 733148,
+                                    "name": "Salami",
+                                    "price": 1.2
+                                },
+                                {
+                                    "id": 733149,
+                                    "name": "Onion rings",
+                                    "price": 0.7
+                                }
+                            ]
+                        },
+                        {
+                            "id": 160393,
+                            "name": "Toppings 2nd half",
+                            "required": false,
+                            "options": [
+                                {
+                                    "id": 733150,
+                                    "name": "Olives",
+                                    "price": 1.2
+                                },
+                                {
+                                    "id": 733151,
+                                    "name": "Ham",
+                                    "price": 1.2
+                                },
+                                {
+                                    "id": 733152,
+                                    "name": "Salami",
+                                    "price": 1.2
+                                },
+                                {
+                                    "id": 733153,
+                                    "name": "Corn",
+                                    "price": 1.2
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "groups": [
+                {
+                    "id": 3692,
+                    "name": "Crust",
+                    "required": true,
+                    "options": [
+                        {
+                            "id": 9371,
+                            "name": "Thick",
+                            "price": 0
+                        },
+                        {
+                            "id": 9372,
+                            "name": "Crispy",
+                            "price": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2862,
+            "name": "Pasta",
+            "description": "Delicious pasta",
+            "items": [
+                {
+                    "id": 9259,
+                    "name": "Traditional Lasagna",
+                    "description": "Home made pasta, ground beef, tomato sauce, bechamel sauce and parmesan",
+                    "price": 11,
+                    "groups": []
+                },
+                {
+                    "id": 9260,
+                    "name": "Spaghetti Pomodoro",
+                    "description": "Spaghetti, tomatoes, mushrooms, garlic, basil",
+                    "price": 9,
+                    "groups": []
+                },
+                {
+                    "id": 125860,
+                    "name": "Spaghetti carbonara",
+                    "description": "Spaghetti, bacon, egg, garlic, parsley",
+                    "price": 15,
+                    "groups": []
+                }
+            ],
+            "groups": []
+        }
+    ]
+}

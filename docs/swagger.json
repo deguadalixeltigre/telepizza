@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TELEPIZZA",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001"
+    }
+  ],
+  "paths": {
+    "/categories": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "GET ALL CATEGORIES",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "General"
+        ],
+        "summary": "POST CREATE NEW CATEGORY",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "categoryName": "Salads",
+                  "description": "Descubre nuestras nuevas ensaladas VIPS hechas con ingredientes tan sabrosos como aguacate, queso de cabra, tiras de vacuno marinado o mango. Waikiki, Santorini, Los \ufffdngeles o 5 Quesos ..."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/categories/d860057c-6949-4657-8cfb-4bc73f74fe05": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "GET CATEGORY DETAILS BY GIVEN ID",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/categories/5c346d49-0d62-458f-ae6e-aef86f323014": {
+      "put": {
+        "tags": [
+          "General"
+        ],
+        "summary": "PUT UPDATE CATEGORY",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "categoryName": "Mediterranean Salads",
+                  "description": "Discover our new salads made with ingredients as tasty as avocado, goat cheese, marinated beef strips or mango. Waikiki, Santorini, Los Angeles or 5 Cheese..."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/categories/c488f8b2-aefc-47de-ae6f-65c8aed59a14": {
+      "delete": {
+        "tags": [
+          "General"
+        ],
+        "summary": "DELETE CATEGORY",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/categories/d860057c-6949-4657-8cfb-4bc73f74fe05/items": {
+      "post": {
+        "tags": [
+          "General"
+        ],
+        "summary": "POST CREATE NEW CATEGORY ITEM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "categoryItemName": "Ensalada Waikiki",
+                  "description": "Tiras de vacuno marinado a la plancha, mango, pepino, pimiento rojo, cebolla roja, anacardos y un toque de hierbabuena, ali\ufffdada con salsa sweet chili y cilantro sobre l\ufffdminas de wonton y una base de tallarines y mezcla de lechugas con brotes.",
+                  "price": 12.5
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/categories/5c346d49-0d62-458f-ae6e-aef86f323014/items/f6ea36a7-221b-484f-99f8-3fad6febe476": {
+      "put": {
+        "tags": [
+          "General"
+        ],
+        "summary": "PUT UPDATE CATEGORY ITEM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "categoryItemId": "f6ea36a7-221b-484f-99f8-3fad6febe476",
+                  "categoryItemName": "Salad Los Angeles",
+                  "description": "Avocado, mango, strawberries, goat cheese, feta cheese, cherry tomato, red onion and walnuts, dressed with lime and coriander vinaigrette on a base of quinoa and mixed lettuce with sprouts.",
+                  "categoryId": "5c346d49-0d62-458f-ae6e-aef86f323014",
+                  "price": 12.5
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/categories/d860057c-6949-4657-8cfb-4bc73f74fe05/items/31d47ba9-04db-49bc-8765-bf86857b41e0": {
+      "delete": {
+        "tags": [
+          "General"
+        ],
+        "summary": "DELETE CATEGORY ITEM",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1yTC5wISXg1IS43b7m2QtVqgJbp44ce4fnYdpCo9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
