@@ -1,5 +1,5 @@
 import { ISysLogs } from "../interfaces/syslogs.interfaces";
-import { SysLogs } from "../models/syslogs.model";
+import { SysLogs } from "../models/syslogs.models";
 
 export class SysLogsService {
 

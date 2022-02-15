@@ -1,19 +1,18 @@
 import { Sequelize } from 'sequelize';
-// Local imports
-import { Menus } from "../models/menus";
-import { MenuItems } from "../models/menu_items";
-import { Categories } from "../models/categories";
-import { CategoryItems } from "../models/category_items";
-import { SysLogsService } from "../services/syslogs.service";
-import { SysLogs } from "../models/syslogs.model";
-import { Utils } from "../utils/utils";
+// Modules
+import { Menus } from "../models/menus.models";
+import { MenuItems } from "../models/menu_items.models";
+import { Categories } from "../models/categories.models";
+import { CategoryItems } from "../models/category_items.models";
+// Utils
+import { Logger } from "../utils/logger";
 
 export class mysqldb {
+
     public sequelize: any;
     public db: any = {};
-    public utils: Utils;
-    constructor(private strConn: string, private sysLogSrv: SysLogsService) {
-        this.utils = new Utils();
+
+    constructor(private strConn: string, private logger: Logger) {
         // Init and connect database
         this.initDatabase();
         this.dbConnect();
@@ -31,9 +30,9 @@ export class mysqldb {
         };                
     }
 
-    private dbConnect() {
+    public async dbConnect() {
         this.sequelize.authenticate().then(() => {
-            this.writeSysLog('Connection has been established successfully.');
+            this.logger.writeSysLog('Connection has been established successfully.');
             // Set associations
             this.db.Menus.model.hasMany(this.db.MenuItems.model, { foreignKey: 'menuId', sourceKey: 'menuId', as: 'items' });
             this.db.MenuItems.model.belongsTo(this.db.Menus.model, { foreignKey: 'menuId', sourceKey: 'menuId', as: 'items' });
@@ -43,20 +42,7 @@ export class mysqldb {
             this.db.CategoryItems.model.belongsTo(this.db.Categories.model, { foreignKey: 'categoryId', sourceKey: 'categoryId', as: 'items' });
         
         }).catch((err: any) => {
-            this.writeSysLog('Unable to connect to the database: ' + err.message);
+            this.logger.writeSysLog('Unable to connect to the database: ' + err.message);
         });
-    }
-
-    private writeSysLog = async (message: string, label: string = "[serv]", level: string = "info") => {
-        try {
-            await this.sysLogSrv.create(new SysLogs({
-                timestamp: String(this.utils.getNow()),
-                label: label,
-                level: level,
-                message: message
-            }));
-        } catch (e) {
-            console.log((e as Error).message);
-        }
     }
 }

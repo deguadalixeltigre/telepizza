@@ -1,15 +1,15 @@
 import { Request, Response, Router } from "express";
-import { ICategory, ICategoryItem } from "./interfaces/categories.interfaces";
-import { CategoriesService } from "./services/categories.service";
-import { SysLogsService } from "./services/syslogs.service";
-import { SysLogs } from "./models/syslogs.model";
-import { Utils } from "./utils/utils";
+import { ICategory, ICategoryItem } from "../interfaces/categories.interfaces";
+import { CategoriesService } from "../services/categories.service";
+import { Utils } from "../utils/utils";
+import { Logger } from "../utils/logger";
+
 const createError = require('http-errors');
 
 export class CategoriesController {
     public router = Router();
     public utils = new Utils();
-    constructor(private categoryService: CategoriesService, private sysLogSrv: SysLogsService) {
+    constructor(private categoryService: CategoriesService, private logger: Logger) {
         this.setRoutes();
     }
 
@@ -32,7 +32,7 @@ export class CategoriesController {
             // Delete category item
             this.router.route("/:id/items/:itemId").delete(this.deleteCategoryItem);
         } catch (e) {
-            this.writeSysLog((e as Error).message);           
+            this.logger.writeSysLog((e as Error).message);           
         }
     }
 
@@ -45,7 +45,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.writeSysLog(JSON.stringify(result));
+                    this.logger.writeHistory("category", "POST", category.categoryId, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -64,7 +64,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.writeSysLog(JSON.stringify(result));
+                    this.logger.writeHistory("categitems", "POST", categoryItem.categoryItemId, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -83,7 +83,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.writeSysLog(JSON.stringify(result));
+                    this.logger.writeHistory("category", "PUT", category.categoryId, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -103,7 +103,9 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.writeSysLog(JSON.stringify(result));
+                    this.logger.writeSysLog(JSON.stringify(result));
+                    this.logger.writeHistory("categitems", "PUT", categoryItem.categoryItemId, JSON.stringify(result));
+
                     res.send(result);
                 };
             }
@@ -119,7 +121,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.writeSysLog(JSON.stringify(result));
+                    this.logger.writeHistory("categories", "GET", req.params.id, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -136,7 +138,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.writeSysLog(JSON.stringify(result));
+                    this.logger.writeHistory("categories", "GET", "all", JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -152,6 +154,7 @@ export class CategoriesController {
                 if (result === 0) {
                     throw createError(404, "Category not found.");
                 } else {
+                    this.logger.writeHistory("categories", "DELETE", req.params.id, JSON.stringify(result));
                     res.send({message: "Category records deleted."});
                 };
             }
@@ -167,6 +170,7 @@ export class CategoriesController {
                 if (result === 0) {
                     throw createError(404, "Category Item not found.");
                 } else {
+                    this.logger.writeHistory("categitems", "DELETE", req.params.id, JSON.stringify(result));
                     res.send({message: "Category Item record deleted."});
                 };
             }
@@ -178,7 +182,7 @@ export class CategoriesController {
     private handleError = (err: any, res: Response) => {
         let msg = (err as Error).message;
         // Write syslog error
-        this.writeSysLog(msg);
+        this.logger.writeSysLog(msg);
         // Send response http error
         if (err.statusCode === 400) {
             res.status(400).send({ message: msg });
@@ -188,19 +192,6 @@ export class CategoriesController {
             res.status(404).send({ message: msg });
         } else {
             res.status(500).send({ message: msg });
-        }
-    }
-
-    private writeSysLog = async (message: string, label: string = "[serv]", level: string = "info") => {
-        try {
-            this.sysLogSrv.create(new SysLogs({
-                timestamp: String(this.utils.getNow()),
-                label: label,
-                level: level,
-                message: message
-            }));
-        } catch (e) {
-            console.log((e as Error).message);
         }
     }
 }

@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import { MenusService } from "./services/menus.service";
-import { Utils } from "./utils/utils";
+import { MenusService } from "../services/menus.service";
+import { Utils } from "../utils/utils";
 const createError = require('http-errors');
 
 export class MenusController {
