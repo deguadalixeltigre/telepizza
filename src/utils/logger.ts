@@ -1,18 +1,18 @@
-import { HistoryService } from "../services/history.service";
+import { TransactionsService } from "../services/transactions.service";
 import { SysLogsService } from "../services/syslogs.service";
-import { History } from "../models/history.models";
+import { Transaction } from "../models/transactions.models";
 import { SysLogs } from "../models/syslogs.models";
 import { Utils } from "../utils/utils";
 
 export class Logger {
 
     public utils: Utils;
-    public historySrv: HistoryService;
+    public transactionsSrv: TransactionsService;
     public sysLogSrv: SysLogsService;
 
     constructor() {
         this.utils = new Utils();
-        this.historySrv = new HistoryService();
+        this.transactionsSrv = new TransactionsService();
         this.sysLogSrv = new SysLogsService();
     }
 
@@ -29,9 +29,9 @@ export class Logger {
         }
     }
 
-    public writeHistory = async (label: string, action: string, labelId: string, data: string) => {
+    public writeTransaction = async (label: string, action: string, labelId: string, data: string) => {
         try {
-            await this.historySrv.create(new History({
+            await this.transactionsSrv.create(new Transaction({
                 timestamp: String(this.utils.getNow()),
                 label: label,
                 action: action,

@@ -4,6 +4,8 @@ import { Menus } from "../models/menus.models";
 import { MenuItems } from "../models/menu_items.models";
 import { Categories } from "../models/categories.models";
 import { CategoryItems } from "../models/category_items.models";
+import { Users } from "../models/users.models";
+import { Devices } from "../models/devices.models";
 // Utils
 import { Logger } from "../utils/logger";
 
@@ -26,7 +28,9 @@ export class mysqldb {
             Menus: new Menus(this.sequelize),
             MenuItems: new MenuItems(this.sequelize),
             Categories: new Categories(this.sequelize),
-            CategoryItems: new CategoryItems(this.sequelize)
+            CategoryItems: new CategoryItems(this.sequelize),
+            Users: new Users(this.sequelize),
+            Devices: new Devices(this.sequelize)
         };                
     }
 

@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { IHistory } from "../interfaces/history.interfaces";
+import { ITransaction } from "../interfaces/transactions.interfaces";
 
-const HistorySchema = new Schema({
+const TransactionSchema = new Schema({
     timestamp: { type: String, unique: true, required: true },
     label: { type: String, required: true },
     action: { type: String, required: true },
@@ -9,4 +9,4 @@ const HistorySchema = new Schema({
     data: { type: String, required: true }
 });
 
-export const History = model<IHistory>("History", HistorySchema);
+export const Transaction = model<ITransaction>("Transaction", TransactionSchema);

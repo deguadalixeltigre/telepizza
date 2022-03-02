@@ -1,14 +1,16 @@
 import { Request, Response, Router } from "express";
 import { ICategory, ICategoryItem } from "../interfaces/categories.interfaces";
 import { CategoriesService } from "../services/categories.service";
+import { AuthController } from "../controllers/auth.controller";
 import { Utils } from "../utils/utils";
 import { Logger } from "../utils/logger";
-
 const createError = require('http-errors');
 
 export class CategoriesController {
     public router = Router();
     public utils = new Utils();
+    public authController: AuthController = new AuthController();
+
     constructor(private categoryService: CategoriesService, private logger: Logger) {
         this.setRoutes();
     }
@@ -18,7 +20,7 @@ export class CategoriesController {
             // Get category
             this.router.route("/:id").get(this.findCategory);
             // Get all categories
-            this.router.route("/").get(this.findAll);
+            this.router.route("/").get(this.authController.authUserJWT, this.findAll);
             // Create new category
             this.router.route("/").post(this.createCategory);
             // Create new category item
@@ -45,7 +47,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.logger.writeHistory("category", "POST", category.categoryId, JSON.stringify(result));
+                    this.logger.writeTransaction("category", "POST", category.categoryId, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -64,7 +66,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.logger.writeHistory("categitems", "POST", categoryItem.categoryItemId, JSON.stringify(result));
+                    this.logger.writeTransaction("categitems", "POST", categoryItem.categoryItemId, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -83,7 +85,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.logger.writeHistory("category", "PUT", category.categoryId, JSON.stringify(result));
+                    this.logger.writeTransaction("category", "PUT", category.categoryId, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -104,7 +106,7 @@ export class CategoriesController {
                     throw createError(result.statusCode, result.message);
                 } else {
                     this.logger.writeSysLog(JSON.stringify(result));
-                    this.logger.writeHistory("categitems", "PUT", categoryItem.categoryItemId, JSON.stringify(result));
+                    this.logger.writeTransaction("categitems", "PUT", categoryItem.categoryItemId, JSON.stringify(result));
 
                     res.send(result);
                 };
@@ -121,7 +123,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.logger.writeHistory("categories", "GET", req.params.id, JSON.stringify(result));
+                    this.logger.writeTransaction("categories", "GET", req.params.id, JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -138,7 +140,7 @@ export class CategoriesController {
                 if (result.statusCode) {
                     throw createError(result.statusCode, result.message);
                 } else {
-                    this.logger.writeHistory("categories", "GET", "all", JSON.stringify(result));
+                    this.logger.writeTransaction("categories", "GET", "all", JSON.stringify(result));
                     res.send(result);
                 };
             }
@@ -154,7 +156,7 @@ export class CategoriesController {
                 if (result === 0) {
                     throw createError(404, "Category not found.");
                 } else {
-                    this.logger.writeHistory("categories", "DELETE", req.params.id, JSON.stringify(result));
+                    this.logger.writeTransaction("categories", "DELETE", req.params.id, JSON.stringify(result));
                     res.send({message: "Category records deleted."});
                 };
             }
@@ -170,7 +172,7 @@ export class CategoriesController {
                 if (result === 0) {
                     throw createError(404, "Category Item not found.");
                 } else {
-                    this.logger.writeHistory("categitems", "DELETE", req.params.id, JSON.stringify(result));
+                    this.logger.writeTransaction("categitems", "DELETE", req.params.id, JSON.stringify(result));
                     res.send({message: "Category Item record deleted."});
                 };
             }

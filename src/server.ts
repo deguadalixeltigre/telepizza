@@ -134,7 +134,13 @@ class Server {
                 await this.utils.sleep(3);
             }
            // Sync database when started
-           this.mysqldb.sequelize.sync();   
+           this.mysqldb.sequelize.sync();
+           // Set global sql connection variable
+           globalThis.__mySqlConn = this.mysqldb;
+           // Check global connection
+           var _list = await globalThis.__mySqlConn.sequelize.query("SELECT COUNT(*) FROM menus");
+            console.log(_list);
+           
         } catch (err) {
             let msg: any = { message: (err as Error).message };
             this.logger.writeSysLog(msg.message);
