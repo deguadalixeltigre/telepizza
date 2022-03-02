@@ -18,21 +18,21 @@ export class CategoriesController {
     public setRoutes() {
         try {
             // Get category
-            this.router.route("/:id").get(this.findCategory);
+            this.router.route("/:id").get(this.authController.checkUserJWT, this.findCategory);
             // Get all categories
-            this.router.route("/").get(this.authController.authUserJWT, this.findAll);
+            this.router.route("/").get(this.authController.checkUserJWT, this.findAll);
             // Create new category
-            this.router.route("/").post(this.createCategory);
+            this.router.route("/").post(this.authController.checkUserJWT, this.createCategory);
             // Create new category item
-            this.router.route("/:id/items").post(this.createCategoryItem);
+            this.router.route("/:id/items").post(this.authController.checkUserJWT, this.createCategoryItem);
             // Update category
-            this.router.route("/:id").put(this.updateCategory);
+            this.router.route("/:id").put(this.authController.checkUserJWT, this.updateCategory);
             // Update category item
-            this.router.route("/:id/items/:itemId").put(this.updateCategoryItem);
+            this.router.route("/:id/items/:itemId").put(this.authController.checkUserJWT, this.updateCategoryItem);
             // Delete category
-            this.router.route("/:id").delete(this.deleteCategory);
+            this.router.route("/:id").delete(this.authController.checkUserJWT, this.deleteCategory);
             // Delete category item
-            this.router.route("/:id/items/:itemId").delete(this.deleteCategoryItem);
+            this.router.route("/:id/items/:itemId").delete(this.authController.checkUserJWT, this.deleteCategoryItem);
         } catch (e) {
             this.logger.writeSysLog((e as Error).message);           
         }

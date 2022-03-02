@@ -5,7 +5,7 @@ import "../middlewares/passport.middlewares";
 
 export class AuthController {
 
-    public authUserJWT(req: Request, res: Response, next: NextFunction) {
+    public checkUserJWT(req: Request, res: Response, next: NextFunction) {
         passport.authenticate("jwt", function (err, user, info) {
             if (err) {
                 console.log(err);
